@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>➕ Aggiungi Pulcino</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #4caf50;
+    }
+    form {
+      background: #fff;
+      display: inline-block;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+    }
+    .back-btn {
+      margin-top: 2rem;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #4caf50;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+    }
+    #conferma {
+      margin-top: 1.5rem;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>➕ Aggiungi Nuovo Pulcino</h1>
+  <form id="pulcinoForm">
+    <input type="text" id="id" placeholder="ID Pulcino (es. EGG-05)" required>
+    <select id="razza" required>
+      <option value="">Seleziona Razza</option>
+      <option value="Italian Coturnix">Italian Coturnix</option>
+      <option value="Rare Sparkly Coturnix">Rare Sparkly Coturnix</option>
+    </select>
+    <input type="date" id="data" required>
+    <select id="sesso" required>
+      <option value="">Seleziona Sesso</option>
+      <option value="F">F</option>
+      <option value="M">M</option>
+    </select>
+    <input type="text" id="anello" placeholder="Codice Anello (es. R-005)">
+    <textarea id="note" placeholder="Osservazioni"></textarea>
+    <button type="submit">Salva Pulcino</button>
+  </form>
+  <div id="conferma"></div>
+  <a href="index.html" class="back-btn">🏠 Torna alla Dashboard</a>
+
+  <script>
+    const form = document.getElementById("pulcinoForm");
+    const conferma = document.getElementById("conferma");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const pulcino = {
+        id: document.getElementById("id").value.trim(),
+        razza: document.getElementById("razza").value,
+        data: document.getElementById("data").value,
+        sesso: document.getElementById("sesso").value,
+        anello: document.getElementById("anello").value.trim(),
+        note: document.getElementById("note").value.trim()
+      };
+      // Salvataggio locale in localStorage
+      let lista = JSON.parse(localStorage.getItem("pulcini")) || [];
+      lista.push(pulcino);
+      localStorage.setItem("pulcini", JSON.stringify(lista));
+      form.reset();
+      conferma.textContent = "✅ Pulcino salvato con successo!";
+    });
+  </script>
+</body>
+</html>

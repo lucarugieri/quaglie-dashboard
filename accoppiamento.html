@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧬 Simulatore Accoppiamento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      color: #4caf50;
+    }
+    input, select {
+      padding: 0.5rem;
+      margin: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 200px;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+    #risultato {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+    .ok {
+      color: green;
+    }
+    .alert {
+      color: red;
+      font-weight: bold;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧬 Simulatore di Accoppiamento</h1>
+
+  <form onsubmit="verifica(event)">
+    <input type="text" id="padre" placeholder="ID Padre (es. Q001)" required>
+    <input type="text" id="madre" placeholder="ID Madre (es. Q002)" required>
+    <br>
+    <button type="submit">Simula</button>
+  </form>
+
+  <div id="risultato"></div>
+
+  <a class="back-btn" href="index.html">🏠 Torna alla Dashboard</a>
+
+  <script>
+    // Esempio tabella linee genetiche
+    const riproduttori = {
+      "Q001": "L1",
+      "Q002": "L2",
+      "Q003": "L1",
+      "Q004": "L3"
+    };
+
+    function verifica(event) {
+      event.preventDefault();
+      const padre = document.getElementById("padre").value.trim().toUpperCase();
+      const madre = document.getElementById("madre").value.trim().toUpperCase();
+
+      const lineaPadre = riproduttori[padre];
+      const lineaMadre = riproduttori[madre];
+
+      const res = document.getElementById("risultato");
+
+      if (!lineaPadre || !lineaMadre) {
+        res.innerHTML = `<p class="alert">❌ ID non trovato nei riproduttori</p>`;
+        return;
+      }
+
+      const combinazione = `${lineaPadre}x${lineaMadre}`;
+      const consanguinei = lineaPadre === lineaMadre;
+
+      res.innerHTML = `
+        <p class="${consanguinei ? 'alert' : 'ok'}">
+          Linea genetica risultante: <strong>${combinazione}</strong><br>
+          ${consanguinei ? '⚠️ Attenzione: stessa linea genetica!' : '✅ Nessuna consanguineità rilevata.'}
+        </p>
+      `;
+    }
+  </script>
+</body>
+</html>

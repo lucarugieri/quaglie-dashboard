@@ -18,43 +18,33 @@
       padding: 1rem;
       font-size: 1.5rem;
     }
-    main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 2rem;
-  gap: 1.5rem;
-}
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      width: 250px;
-      flex: 1 1 250px;
-      transition: transform 0.2s ease;
-    }
-    .card:hover {
-      transform: scale(1.03);
-    }
-    button {
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.25rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background-color: #43a047;
-    }
-  </style>
-</head>
-<body>
-  <header>🐣 Dashboard Quaglie - Luca Rugieri</header>
-  <main>
+    <main>
+  <div class="card">
+    <h3>📋 Registro Pulcini</h3>
+    <p>Visualizza i dettagli di ogni pulcino.</p>
+    <a href='pulcini.html'><button>Apri</button></a>
+  </div>
+  <div class="card">
+    <h3>📅 Scadenzario</h3>
+    <p>Controlla le date di anellatura e svezzamento.</p>
+    <a href='scadenzario.html'><button>Apri</button></a>
+  </div>
+  <div class="card">
+    <h3>📈 Statistiche</h3>
+    <p>Guarda grafici e percentuali di schiusa.</p>
+    <a href='statistiche.html'><button>Apri</button></a>
+  </div>
+  <div class="card">
+    <h3>🧬 Simula Accoppiamento</h3>
+    <p>Evita incroci tra soggetti consanguinei.</p>
+    <a href='accoppiamento.html'><button>Apri</button></a>
+  </div>
+  <div class="card">
+    <h3>📖 About</h3>
+    <p>Scopri la storia dietro questa dashboard.</p>
+    <a href="about.html"><button>Apri</button></a>
+  </div>
+</main>
     <div class="card">
       <h3>📋 Registro Pulcini</h3>
       <p>Visualizza i dettagli di ogni pulcino.</p>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📈 Statistiche Quaglie</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #4caf50;
+    }
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    canvas {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📈 Statistiche Pulcini</h1>
+  <div class="chart-container">
+    <canvas id="razzaChart" width="300" height="300"></canvas>
+    <canvas id="sessoChart" width="300" height="300"></canvas>
+    <canvas id="percentualeChart" width="300" height="300"></canvas>
+  </div>
+
+  <a class="back-btn" href="index.html">🏠 Torna alla Dashboard</a>
+
+  <script>
+    // Dati statici di esempio — si potranno collegare dinamicamente
+    const totaleUova = 24;
+    const pulciniSchiusi = 3;
+    const razze = {
+      "Italian Coturnix": 2,
+      "Rare Sparkly Coturnix": 1
+    };
+    const sesso = {
+      "Femmine": 1,
+      "Maschi": 2
+    };
+
+    const ctxRazza = document.getElementById("razzaChart").getContext("2d");
+    const ctxSesso = document.getElementById("sessoChart").getContext("2d");
+    const ctxPercentuale = document.getElementById("percentualeChart").getContext("2d");
+
+    new Chart(ctxRazza, {
+      type: "pie",
+      data: {
+        labels: Object.keys(razze),
+        datasets: [{
+          data: Object.values(razze),
+          backgroundColor: ["#4caf50", "#81c784"]
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Distribuzione per Razza"
+          }
+        }
+      }
+    });
+
+    new Chart(ctxSesso, {
+      type: "bar",
+      data: {
+        labels: Object.keys(sesso),
+        datasets: [{
+          label: "Numero Pulcini",
+          data: Object.values(sesso),
+          backgroundColor: ["#42a5f5", "#ff7043"]
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Distribuzione per Sesso"
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    new Chart(ctxPercentuale, {
+      type: "doughnut",
+      data: {
+        labels: ["Schiuse", "Non Schiuse"],
+        datasets: [{
+          data: [pulciniSchiusi, totaleUova - pulciniSchiusi],
+          backgroundColor: ["#66bb6a", "#e0e0e0"]
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Percentuale di Schiusa"
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
